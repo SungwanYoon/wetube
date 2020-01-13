@@ -24,8 +24,9 @@ export const postLogin = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const logout = (req, res) =>
-  res.render("logout", { pageTitle: "logout" });
+export const logout = (req, res) => {
+  res.redirect(routes.home);
+};
 export const userDetail = (req, res) =>
   res.render("userDetail", { pageTitle: "User Detail" });
 export const editProfile = (req, res) =>
