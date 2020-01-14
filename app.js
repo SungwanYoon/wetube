@@ -15,6 +15,7 @@ const app = express();
 app.use(helmet());
 // Pub View Engine
 app.set("view engine", "pug");
+app.use("/uploads", express.static("uploads"));
 // Cookie data parser
 app.use(cookieParser());
 // Body form data parser
