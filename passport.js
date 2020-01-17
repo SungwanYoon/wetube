@@ -1,12 +1,9 @@
-import passport from "passport";
-import GithubStrategy from "passport-github";
-import FacebookStrategy from "passport-facebook";
-import User from "./models/User";
-import {
-  githubLoginCallback,
-  facebookLoginCallback
-} from "./controllers/userController";
-import routes from "./routes";
+import passport from 'passport';
+import GithubStrategy from 'passport-github';
+import FacebookStrategy from 'passport-facebook';
+import User from './models/User';
+import { githubLoginCallback, facebookLoginCallback } from './controllers/userController';
+import routes from './routes';
 
 passport.use(User.createStrategy());
 
@@ -28,15 +25,13 @@ passport.use(
     {
       clientID: process.env.FB_ID,
       clientSecret: process.env.FB_SECRET,
-      callbackURL: `https://polar-sea-27980.herokuapp.com${
-        routes.facebookCallback
-      }`,
-      profileFields: ["id", "displayName", "photos", "email"],
-      scope: ["public_profile", "email"]
+      callbackURL: `https://polar-sea-27980.herokuapp.com${routes.facebookCallback}`,
+      profileFields: ['id', 'displayName', 'photos', 'email'],
+      scope: ['public_profile', 'email']
     },
     facebookLoginCallback
   )
 );
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(User.serializeUser()); // Put Cookie
+passport.deserializeUser(User.deserializeUser()); // Fint Cookie
