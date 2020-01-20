@@ -1,16 +1,16 @@
-import routes from "../routes";
-import Video from "../models/Video";
-import Comment from "../models/Comment";
+import routes from '../routes';
+import Video from '../models/Video';
+import Comment from '../models/Comment';
 
 // Home
 
 export const home = async (req, res) => {
   try {
     const videos = await Video.find({}).sort({ _id: -1 });
-    res.render("home", { pageTitle: "Home", videos });
+    res.render('home', { pageTitle: 'Home', videos });
   } catch (error) {
     console.log(error);
-    res.render("home", { pageTitle: "Home", videos: [] });
+    res.render('home', { pageTitle: 'Home', videos: [] });
   }
 };
 
@@ -23,18 +23,17 @@ export const search = async (req, res) => {
   let videos = [];
   try {
     videos = await Video.find({
-      title: { $regex: searchingBy, $options: "i" }
+      title: { $regex: searchingBy, $options: 'i' }
     });
   } catch (error) {
     console.log(error);
   }
-  res.render("search", { pageTitle: "Search", searchingBy, videos });
+  res.render('search', { pageTitle: 'Search', searchingBy, videos });
 };
 
 // Upload
 
-export const getUpload = (req, res) =>
-  res.render("upload", { pageTitle: "Upload" });
+export const getUpload = (req, res) => res.render('upload', { pageTitle: 'Upload' });
 
 export const postUpload = async (req, res) => {
   const {
@@ -60,9 +59,9 @@ export const videoDetail = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id)
-      .populate("creator")
-      .populate("comments");
-    res.render("videoDetail", { pageTitle: video.title, video });
+      .populate('creator')
+      .populate('comments');
+    res.render('videoDetail', { pageTitle: video.title, video });
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -79,7 +78,7 @@ export const getEditVideo = async (req, res) => {
     if (String(video.creator) !== req.user.id) {
       throw Error();
     } else {
-      res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+      res.render('editVideo', { pageTitle: `Edit ${video.title}`, video });
     }
   } catch (error) {
     res.redirect(routes.home);
