@@ -2,7 +2,7 @@
   "name": "wetube",
   "version": "1.0.0",
   "description": "Cloning Youtube with Vanilla and NodeJS",
-  "author": "Nicolás Serrano Arévalo",
+  "author": "Calvin",
   "dependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.5",
@@ -15,8 +15,10 @@
     "axios": "^0.18.0",
     "babel-loader": "^8.0.4",
     "body-parser": "^1.18.3",
-    "connect-mongo": "^2.0.1",
+    "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.3",
+    "core-util-is": "^1.0.2",
+    "cross-env": "^6.0.3",
     "css-loader": "^1.0.1",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
@@ -44,9 +46,9 @@
     "webpack-cli": "^3.1.2"
   },
   "scripts": {
-    "dev:server": "nodemon --exec babel-node src/init.js --delay 2 --ignore '.scss' --ignore 'static' ",
-    "dev:assets": "cd src && WEBPACK_ENV=development webpack -w",
-    "build:assets": "cd src && WEBPACK_ENV=production webpack",
+    "dev:server": "nodemon --exec babel-node init.js --delay 1 --ignore '.scss' --ignore 'static' ",
+    "dev:assets": "cross-env WEBPACK_ENV=development webpack -w",
+    "build:assets": "cross-env WEBPACK_ENV=production webpack",
     "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
     "copyAll": "cp -R src/static build && cp -R src/views build",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
