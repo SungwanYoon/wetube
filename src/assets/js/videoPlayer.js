@@ -1,4 +1,4 @@
-import getBlobDuration from 'get-blob-duration';
+//import getBlobDuration from 'get-blob-duration';
 
 const videoContainer = document.getElementById('jsVideoPlayer');
 const videoPlayer = document.querySelector('#jsVideoPlayer video');
@@ -93,7 +93,7 @@ async function setTotalTime() {
   let duration;
   if (!isFinite(videoPlayer.duration)) {
     const blob = await fetch(videoPlayer.src).then(response => response.blob());
-    duration = await getBlobDuration(blob);
+    //duration = await getBlobDuration(blob);
   } else {
     duration = videoPlayer.duration;
   }
