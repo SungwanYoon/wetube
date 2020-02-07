@@ -30,18 +30,25 @@ const startRecording = () => {
 
 const getVideo = async () => {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-      video: { width: 1280, height: 720 }
-    });
-    videoPreview.srcObject = stream;
-    videoPreview.muted = true;
-    videoPreview.play();
-    recordBtn.innerHTML = 'Stop recording';
-    streamObject = stream;
-    startRecording();
+    await navigator.mediaDevices
+      .getUserMedia({
+        audio: true,
+        video: { width: 1280, height: 720 }
+      })
+      .then(stream => {
+        videoPreview.srcObject = stream;
+        videoPreview.muted = true;
+        videoPreview.play();
+        recordBtn.innerHTML = 'Stop recording';
+        streamObject = stream;
+        startRecording();
+      })
+      .catch(error => {
+        console.dir(error);
+        recordBtn.innerHTML = '☹️ Cant record';
+      });
   } catch (error) {
-    recordBtn.innerHTML = '☹️ Cant record';
+    console.log(error);
   } finally {
     recordBtn.removeEventListener('click', getVideo);
   }
